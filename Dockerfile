@@ -33,7 +33,8 @@ ENV         SENDMAIL_FEATURE_nouucp=nospecial \
             LIBLOGFAF_SENDTO=/dev/tty
 
 RUN         set -euo pipefail \
-            && yum install -y bind-utils telnet patch sendmail sendmail-cf cyrus-sasl-plain cyrus-sasl-ntlm cyrus-sasl-md5 && yum clean all && rm -rf /var/cache/yum \
+            && yum install -y sudo bind-utils telnet patch sendmail sendmail-cf cyrus-sasl-plain cyrus-sasl-ntlm cyrus-sasl-md5 && yum clean all && rm -rf /var/cache/yum \
+            && setcap 'cap_net_bind_service=+ep' /usr/sbin/sendmail.sendmail \
             && setcap 'cap_net_bind_service=+ep' /usr/sbin/sendmail.sendmail \
             && sed -i "/.*EXPOSED_USER.*/d" /etc/mail/sendmail.mc \
             && sed -i "/.*procmail.*/d" /etc/mail/sendmail.mc \

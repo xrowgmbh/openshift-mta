@@ -44,7 +44,7 @@ RUN         set -euo pipefail \
             && printf 'pwcheck_method: auxprop\nauxprop_plugin: sasldb\nsasldb_path: /etc/mail/sasldb2\nmech_list: PLAIN LOGIN CRAM-MD5 DIGEST-MD5 NTLM' > /etc/sasl2/Sendmail.conf \
             && echo NOOP | saslpasswd2 -c -p NOOP && saslpasswd2 -d NOOP \
             && chgrp 0   -R /var/spool/clientmqueue /var/spool/mqueue /etc/sasldb2 /etc/aliases /etc/aliases.db \
-            && chmod g=u -R /var/spool/clientmqueue /var/spool/mqueue /etc/sasldb2 /etc/aliases /etc/aliases.db /etc/mail/ /etc/passwd /usr/share/sendmail-cf/m4/proto.m4
+            && chmod g=u -R /var/spool/clientmqueue /var/spool/mqueue /etc/sasldb2 /etc/aliases /etc/aliases.db /etc/mail/ /etc/passwd /etc/group /usr/share/sendmail-cf/m4/proto.m4
 
 COPY        root /
 
